@@ -1,11 +1,17 @@
 pipeline {
   agent {
-    docker { image 'node:16-alpine' }
+    docker {
+      image 'node:16-alpine'
+      label ''                     // optional: if using specific node label
+      args '-u root:root'         // optional: for root permissions if needed
+    }
   }
   stages {
     stage('Test') {
       steps {
-        sh 'node --version'
+        script {
+          sh 'node --version'
+        }
       }
     }
   }
